@@ -18,11 +18,25 @@ if arquivo is not None:
         
     st.success("Arquivo carregado com sucesso!")
 
+    st.subheader("Visão geral do DataFrame")
+    st.dataframe(df.head())
+
+    col1, col2 = st.columns(2)
+    col1.metric("Número de Linhas", df.shape[0])
+    col2.metric("Número de Colunas", df.shape[1])
+
     st.subheader("Colunas do arquivo")
     st.write(list(df.columns))
 
     st.subheader("Valores nulos por coluna")
-    st.write(df.isnull().sum())
+    nulos = df.isnull().sum()
+
+    tabela_nulos = pd.DataFrame({
+        'Colunas': nulos.index,
+        'Qt. de valores Nulos': nulos.values
+    })
+
+    st.write(tabela_nulos)
 
     st.subheader("Estatísticas das colunas numéricas")
     st.write(df.describe())
@@ -40,6 +54,17 @@ if arquivo is not None:
         st.pyplot(fig)
     else:
         st.warning("Nenhuma coluna numérica encontrada para gerar gráfico.")
+
+    st.subheader("Exportar dados limpos")
+    if st.button("Remover linhas com valores nulos"):
+        df_limpo = df.dropna()
+        csv = df_limpo.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="Download do CSV limpo",
+            data=csv,
+            file_name='dados_limpos.csv',
+            mime='text/csv',
+        )
 
 else:
     st.info("Aguardando o upload do arquivo CSV...")
