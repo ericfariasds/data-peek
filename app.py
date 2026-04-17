@@ -3,6 +3,23 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Configura estilo padrão para todos os gráficos
+plt.style.use('seaborn-v0_8-darkgrid')
+
+plt.rcParams.update({
+    'font.size': 12,
+    'font.family': 'sans-serif',
+    'axes.titlesize': 16,
+    'axes.titleweight': 'bold',
+    'axes.labelsize': 12,
+    'axes.labelweight': 'bold',
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'figure.dpi': 100,
+    'savefig.dpi': 100,
+    'figure.autolayout': True
+})
+
 #-----CABEÇALHO DA APLICAÇÃO-----
 st.title("DataPeek - Seu CSV Explicado")
 st.write("Faça upload do seu arquivo CSV para obter insights e visualizações rápidas!   ")
@@ -87,9 +104,32 @@ if arquivo is not None:
         coluna_escolhida = st.selectbox("Escolha uma coluna numérica: ", colunas_numericas)
 
         # Cria o histograma
-        fig, ax = plt.subplots()
-        ax.hist(df[coluna_escolhida].dropna(), bins=20, color='skyblue', edgecolor='black')
-        ax.set_title(f"Distribuição de {coluna_escolhida}")
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        ax.hist(df[coluna_escolhida].dropna(), 
+                bins=30,
+                color='#2E86AB',
+                edgecolor='white',
+                alpha=0.7,
+                linewidth=0.5)
+        
+        media = df[coluna_escolhida].mean()
+        ax.axvline(media, color='red', linestyle='--', linewidth=2, label=f'Média: {media:.2f}')
+        
+        mediana = df[coluna_escolhida].median()
+        ax.axvline(mediana, color='green', linestyle=':', linewidth=2, label=f'Mediana: {mediana:.2f}')
+        
+        ax.set_title(f"Distribuição de {coluna_escolhida}", fontsize=16, fontweight='bold', pad=20)
+        ax.set_xlabel(coluna_escolhida, fontsize=12)
+        ax.set_ylabel("Frequência", fontsize=12)
+        
+        ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5)
+        ax.legend(loc='upper right', frameon=True, fancybox=True, shadow=True)
+        
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        
+        plt.tight_layout()
         st.pyplot(fig)
     else:
         st.warning("Nenhuma coluna numérica encontrada para gerar gráfico.")
