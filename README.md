@@ -25,27 +25,27 @@
 
 ## Como executar o projeto
 
-**1. Clone o repositório
+**1. Clone o repositório**
 ```bash
 git clone https://github.com/ericfariasds/DataPeek.git
 cd DataPeek
 
 ```
 
-**2. Crie e ative o ambiente virtual
+**2. Crie e ative o ambiente virtual**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 
 ```
 
-**3. Instale as dependências
+**3. Instale as dependências**
 ```bash
 pip install -r requirements.txt
 
 
 ```
-**4. Execute
+**4. Execute**
 ```bash
 streamlit run app.py
 
@@ -63,4 +63,5 @@ streamlit run app.py
 
 ## Autor
 
-Eric Farias
+**Eric Farias**  
+GitHub: [@ericfariasds](https://github.com/ericfariasds)
