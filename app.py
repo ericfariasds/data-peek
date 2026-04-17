@@ -143,25 +143,25 @@ if arquivo is not None:
         st.warning("Nenhuma coluna numérica encontrada para gerar gráfico.")
 
 #-----COLUNAS CATEGÓRICAS-----
-        st.subheader("Análise de colunas categóricas")
+    st.subheader("Análise de colunas categóricas")
+
+    # Pega apenas colunas do tipo texto (object)
+    colunas_categoricas = df.select_dtypes(include=['object']).columns.tolist()
     
-        # Pega apenas colunas do tipo texto (object)
-        colunas_categoricas = df.select_dtypes(include=['object']).columns.tolist()
+    # Só executa se existir pelo menos uma coluna de texto
+    if len(colunas_categoricas) > 0:
+        coluna_cat = st.selectbox("Escolha uma coluna categórica:", colunas_categoricas)
         
-        # Só executa se existir pelo menos uma coluna de texto
-        if len(colunas_categoricas) > 0:
-            coluna_cat = st.selectbox("Escolha uma coluna categórica:", colunas_categoricas)
-            
-            contagem = df[coluna_cat].value_counts().head(10)
-            
-            fig2, ax2 = plt.subplots(figsize=(12, 6))
-            ax2.barh(contagem.index, contagem.values, color='#A23B72')
-            
-            # Título e rótulos
-            ax2.set_title(f"Top 10 valores em {coluna_cat}")
-            ax2.set_xlabel("Quantidade")
-            ax2.set_ylabel(coluna_cat)
+        contagem = df[coluna_cat].value_counts().head(10)
         
+        fig2, ax2 = plt.subplots(figsize=(12, 6))
+        ax2.barh(contagem.index, contagem.values, color='#A23B72')
+        
+        # Título e rótulos
+        ax2.set_title(f"Top 10 valores em {coluna_cat}")
+        ax2.set_xlabel("Quantidade")
+        ax2.set_ylabel(coluna_cat)
+    
         st.pyplot(fig2)
 
 #-----EXPORTAÇÃO DE DADOS LIMPOS-----
@@ -183,5 +183,3 @@ if arquivo is not None:
 else:
     #Estado inicial enquanto nenhum arquivo é carregado
     st.info("Aguardando o upload do arquivo CSV...")
-
-
