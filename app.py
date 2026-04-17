@@ -33,7 +33,7 @@ if arquivo is not None:
 
 #-----LEITURA DO CSV COM TRATAMENTO DE ERROS-----
     try:
-        df = pd.read_csv(arquivo) #Tenta ler o CSV normalmente
+        df = pd.read_csv(arquivo, sep=';') #Tenta ler o CSV normalmente
     except:
         #Se ocorrer um erro, tenta ler o CSV ignorando as linhas com formatação irregular
         st.warning("CSV com formatação irregular - algumas linhas foram ignoradas")
@@ -89,7 +89,7 @@ if arquivo is not None:
     estatisticas.rename(index=traducao, inplace=True)
     
     #Exiber a tabela
-    st.dataframe(estatisticas.style.format("{:.2f}"))
+    st.dataframe(estatisticas)
 
 #-----GERAÇÃO DE GRÁFICOS-----
     st.subheader("Gráficos")

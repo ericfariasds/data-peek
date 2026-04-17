@@ -1,15 +1,46 @@
-# DataPeek
+#DataPeek - Analisador de CSV
 
-Analisador de CSV simples e rápido feito com Streamlit.
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.56-red.svg)](https://streamlit.io/)
+[![Pandas](https://img.shields.io/badge/Pandas-3.0-green.svg)](https://pandas.pydata.org/)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-3.10-orange.svg)](https://matplotlib.org/)
 
-## Como usar:
-1. Clone o repositório
-2. Instale as dependências: `pip install -r requirements.txt`
-3. Execute: `streamlit run app.py`
+**DataPeek** é uma aplicação web para análise rápida de arquivos CSV. Faça upload, visualize estatísticas, identifique valores nulos e gere gráficos automaticamente.
 
-## Funcionalidades:
-- Upload de CSV
-- Listagem de colunas
-- Contagem de valores nulos
-- Estatísticas descritivas
-- Histograma interativo
+##Funcionalidades
+
+- Upload de CSV com detecção automática de separador (`,` ou `;`)
+- Pré-visualização dos dados (5 primeiras linhas)
+- Métricas: total de linhas e colunas
+- Identificação de valores nulos por coluna
+- Estatísticas descritivas traduzidas (média, mediana, quartis)
+- Gráficos:
+  - Histograma com linhas de média e mediana
+  - Gráfico de barras para colunas categóricas (Top 10)
+- Exportação de dados limpos (sem valores nulos)
+
+## Como Executar
+
+# Clone o repositório
+git clone https://github.com/ericfariasds/DataPeek.git
+cd DataPeek
+
+# Crie e ative o ambiente virtual
+python3 -m venv venv
+source venv/bin/activate
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Execute
+streamlit run app.py
+
+## Tecnologias
+
+- Streamlit - Interface web
+- Pandas - Manipulação de dados
+- Matplotlib - Visualizações
+
+## Autor
+
+Eric Farias
