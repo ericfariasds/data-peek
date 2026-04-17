@@ -1,4 +1,4 @@
-#DataPeek - Analisador de CSV
+## DataPeek - Analisador de CSV
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.56-red.svg)](https://streamlit.io/)
@@ -7,7 +7,9 @@
 
 **DataPeek** é uma aplicação web para análise rápida de arquivos CSV. Faça upload, visualize estatísticas, identifique valores nulos e gere gráficos automaticamente.
 
-##Funcionalidades
+---
+
+## Funcionalidades
 
 - Upload de CSV com detecção automática de separador (`,` ou `;`)
 - Pré-visualização dos dados (5 primeiras linhas)
@@ -19,27 +21,45 @@
   - Gráfico de barras para colunas categóricas (Top 10)
 - Exportação de dados limpos (sem valores nulos)
 
-## Como Executar
+---
 
-# Clone o repositório
+## Como executar o projeto
+
+**1. Clone o repositório
+```bash
 git clone https://github.com/ericfariasds/DataPeek.git
 cd DataPeek
 
-# Crie e ative o ambiente virtual
+```
+
+**2. Crie e ative o ambiente virtual
+```bash
 python3 -m venv venv
 source venv/bin/activate
 
-# Instale as dependências
+```
+
+**3. Instale as dependências
+```bash
 pip install -r requirements.txt
 
-# Execute
+
+```
+**4. Execute
+```bash
 streamlit run app.py
+
+```
+
+---
 
 ## Tecnologias
 
 - Streamlit - Interface web
 - Pandas - Manipulação de dados
 - Matplotlib - Visualizações
+
+---
 
 ## Autor
 
