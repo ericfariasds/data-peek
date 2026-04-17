@@ -113,22 +113,30 @@ if arquivo is not None:
                 alpha=0.7,
                 linewidth=0.5)
         
+        # Calcular a média da coluna escolhida
         media = df[coluna_escolhida].mean()
         ax.axvline(media, color='red', linestyle='--', linewidth=2, label=f'Média: {media:.2f}')
         
+        # Calcular a mediana da coluna escolhida
         mediana = df[coluna_escolhida].median()
         ax.axvline(mediana, color='green', linestyle=':', linewidth=2, label=f'Mediana: {mediana:.2f}')
         
+        # Título e rótulos
         ax.set_title(f"Distribuição de {coluna_escolhida}", fontsize=16, fontweight='bold', pad=20)
         ax.set_xlabel(coluna_escolhida, fontsize=12)
         ax.set_ylabel("Frequência", fontsize=12)
         
+        # Grade de fundo
         ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5)
+
+        # Legenda
         ax.legend(loc='upper right', frameon=True, fancybox=True, shadow=True)
         
+        # Remover bordas superior e direita
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         
+        # Ajustar layout e exibe o gráfico
         plt.tight_layout()
         st.pyplot(fig)
     else:
