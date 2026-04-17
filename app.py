@@ -71,7 +71,7 @@ if arquivo is not None:
     st.subheader("Estatísticas das colunas numéricas")
 
     #calcula as estatísticas
-    estatiscas = df.describe()
+    estatisticas = df.describe()
 
     #Dicionário de tradução dos índices
     traducao = {
@@ -86,10 +86,10 @@ if arquivo is not None:
     }
 
     #Renomeia os índices
-    estatiscas.rename(index=traducao, inplace=True)
+    estatisticas.rename(index=traducao, inplace=True)
     
-    #Exibew a tabela
-    st.write(estatiscas)
+    #Exiber a tabela
+    st.dataframe(estatisticas.style.format("{:.2f}"))
 
 #-----GERAÇÃO DE GRÁFICOS-----
     st.subheader("Gráficos")
@@ -141,6 +141,28 @@ if arquivo is not None:
         st.pyplot(fig)
     else:
         st.warning("Nenhuma coluna numérica encontrada para gerar gráfico.")
+
+#-----COLUNAS CATEGÓRICAS-----
+        st.subheader("Análise de colunas categóricas")
+    
+        # Pega apenas colunas do tipo texto (object)
+        colunas_categoricas = df.select_dtypes(include=['object']).columns.tolist()
+        
+        # Só executa se existir pelo menos uma coluna de texto
+        if len(colunas_categoricas) > 0:
+            coluna_cat = st.selectbox("Escolha uma coluna categórica:", colunas_categoricas)
+            
+            contagem = df[coluna_cat].value_counts().head(10)
+            
+            fig2, ax2 = plt.subplots(figsize=(12, 6))
+            ax2.barh(contagem.index, contagem.values, color='#A23B72')
+            
+            # Título e rótulos
+            ax2.set_title(f"Top 10 valores em {coluna_cat}")
+            ax2.set_xlabel("Quantidade")
+            ax2.set_ylabel(coluna_cat)
+        
+        st.pyplot(fig2)
 
 #-----EXPORTAÇÃO DE DADOS LIMPOS-----
     st.subheader("Exportar dados limpos")
